@@ -25,4 +25,17 @@ describe('Course', () => {
     expect(events).toHaveLength(1);
     expect(events[0].eventName).toBe('course.created');
   });
+
+  it('should record a CourseRenamedDomainEvent after rename', () => {
+    const command = CreateCourseCommandMother.random();
+    const course = CourseMother.fromCreateCommand(command);
+    const oldName = course.name;
+    const newName = CourseNameMother.random();
+    course.rename(newName);
+
+    const events = course.pullDomainEvents();
+
+    expect(events).toHaveLength(1);
+    expect(events[0].eventName).toBe('course.renamed');
+  });
 });
