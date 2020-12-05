@@ -11,7 +11,6 @@ let repository: CourseRepositoryMock;
 let finder: CourseFinder;
 let domainFinder: DomainCourseFinder;
 
-
 beforeEach(() => {
   repository = new CourseRepositoryMock();
   domainFinder = new DomainCourseFinder(repository);

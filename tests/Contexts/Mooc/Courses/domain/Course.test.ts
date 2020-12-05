@@ -10,7 +10,7 @@ describe('Course', () => {
   it('should return a new course instance', () => {
     const command = CreateCourseCommandMother.random();
 
-    const course = CourseMother.fromCommand(command);
+    const course = CourseMother.fromCreateCommand(command);
 
     expect(course.id.value).toBe(command.id);
     expect(course.name.value).toBe(command.name);
