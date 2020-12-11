@@ -13,6 +13,8 @@ import { RenameCourseCommand } from '../../../../../../src/Contexts/Mooc/Courses
 import { CourseDuration } from '../../../../../../src/Contexts/Mooc/Courses/domain/CourseDuration';
 import { CourseName } from '../../../../../../src/Contexts/Mooc/Shared/domain/Courses/CourseName';
 import { CourseId } from '../../../../../../src/Contexts/Mooc/Shared/domain/Courses/CourseId';
+import { CourseDescriptionMother } from '../../domain/CourseDescriptionMother';
+import { CourseDescription } from '../../../../../../src/Contexts/Mooc/Courses/domain/CourseDescription';
 
 let repository: CourseRepositoryMock;
 let handler: RenameCourseCommandHandler;
@@ -32,11 +34,12 @@ it('should rename a course', async () => {
   const name = CourseNameMother.create(command.name);
   const oldName = CourseNameMother.random();
   const duration = CourseDurationMother.random();
-  const courseBefore = CourseMother.create(id, oldName, duration);
+  const description = CourseDescriptionMother.random();
+  const courseBefore = CourseMother.create(id, oldName, duration, description);
   repository.returnOnSearch(courseBefore);
   
   await whenRenameCourseIsInvoked(command);
-  thenTheCourseShouldBeRenamed(id, name, duration);
+  thenTheCourseShouldBeRenamed(id, name, duration, description);
 });
 
 it('should get an exception', async () => {
@@ -48,8 +51,8 @@ async function whenRenameCourseIsInvoked(command: RenameCourseCommand) : Promise
   await handler.handle(command);
 }
 
-function thenTheCourseShouldBeRenamed(id: CourseId, name: CourseName, duration: CourseDuration) : void {
-  const renamedCourse = CourseMother.create(id, name, duration);
+function thenTheCourseShouldBeRenamed(id: CourseId, name: CourseName, duration: CourseDuration, description: CourseDescription) : void {
+  const renamedCourse = CourseMother.create(id, name, duration, description);
   repository.assertSearch(id);
   repository.assertLastSavedCourseIs(renamedCourse);
 }
