@@ -28,8 +28,9 @@ describe('Search Course', () => {
     const course = CourseMother.random();
 
     await repository.save(course);
+    const response = await repository.search(course.id);
 
-    expect(course).toEqual(await repository.search(course.id));
+    expect(course).toEqual(response);
   });
 
   it('should not return a non existing course', async () => {
