@@ -28,9 +28,8 @@ export class MongoEnvironmentArranger extends EnvironmentArranger {
     return collections.map(collection => collection.name);
   }
 
-  public async addCourse(): Promise<void> {
+  public async addCourseWithId(id: string): Promise<void> {
     const client = await this.client();
-    const id = "ef8ac118-8d7f-49cc-abec-78e0d05af80b";
     await client.db().collection("courses").updateOne({ _id: id } ,{$set: { id, name: 'Test Course!', duration: '1', description: 'Trust me, this is a test course' } }, { upsert: true });
   }
 
