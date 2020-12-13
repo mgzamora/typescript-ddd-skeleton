@@ -2,7 +2,6 @@ import { CoursesResponse } from './../../../Contexts/Mooc/Courses/application/Ge
 import { Controller } from './Controller';
 import { Request, Response } from 'express';
 import httpStatus = require('http-status');
-
 import { QueryBus } from '../../../Contexts/Shared/domain/QueryBus';
 import { GetCoursesQuery } from '../../../Contexts/Mooc/Courses/application/GetCourses/GetCoursesQuery';
 
