@@ -15,6 +15,9 @@ export const register = (router: Router) => {
   const coursesGetController = container.get('Apps.mooc.controllers.CoursesGetController');
   router.get('/courses', (req: Request, res: Response) => coursesGetController.run(req, res));
 
+  const courseLikePostController = container.get('Apps.mooc.controllers.CourseLikePostController');
+  router.get('/courses/:id/like', (req: Request, res: Response) => courseLikePostController.run(req, res));
+
   const coursesCounterGetController = container.get('Apps.mooc.controllers.CoursesCounterGetController');
   router.get('/courses-counter', (req: Request, res: Response) => coursesCounterGetController.run(req, res));
 };
