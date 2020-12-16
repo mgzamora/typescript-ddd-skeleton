@@ -12,8 +12,8 @@ export class LikeCourseCommandHandler implements CommandHandler<LikeCourseComman
   }
 
   handle(command: LikeCourseCommand): Promise<void> {
-    const id = new CourseId(command.id);
+    const courseId = new CourseId(command.id);
     const userId = new UserId(command.userId);
-    return this.courseLiker.run({ id, userId });
+    return this.courseLiker.run({ courseId, userId });
   }
 }

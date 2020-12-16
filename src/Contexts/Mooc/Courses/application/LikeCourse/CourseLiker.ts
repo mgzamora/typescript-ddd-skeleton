@@ -4,15 +4,15 @@ import { UserId } from '../../domain/UserId';
 import { CourseRepository } from '../../domain/CourseRepository';
 
 type Params = {
-  id: CourseId;
+  courseId: CourseId;
   userId: UserId;
 };
 
 export class CourseLiker {
   constructor(private courseFinder: CourseFinder, private repository: CourseRepository) {}
 
-  async run({ id, userId }: Params): Promise<void> {
-    const course = await this.courseFinder.run(id);
+  async run({ courseId, userId }: Params): Promise<void> {
+    const course = await this.courseFinder.run(courseId);
 
     course.like(userId);
 
